@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "xueluoanping.swayinggarden.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "swayinggarden.refmap.json",
+  "mixins": [
+    "MixinClientClientLevel"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
