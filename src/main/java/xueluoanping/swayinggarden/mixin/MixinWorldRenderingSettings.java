@@ -23,7 +23,8 @@ public abstract class MixinWorldRenderingSettings implements IAttach {
 
     @Inject(at = {@At("RETURN")}, method = {"setBlockStateIds"},require = 0,remap = false)
     private void ecliptic$reload(CallbackInfo ci) {
-        if(reloadRequired){
+        // if(reloadRequired)
+        {
             IrisAttach.reload(blockStateIds, Iris.getIrisConfig().getShaderPackName().orElse(""));
         }
     }
