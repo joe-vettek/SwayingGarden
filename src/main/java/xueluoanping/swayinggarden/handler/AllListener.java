@@ -10,10 +10,13 @@ import xueluoanping.swayinggarden.client.shader.IrisHook;
 @Mod.EventBusSubscriber(modid = SwayingGarden.MOD_ID)
 public class AllListener {
 
+    private static long lastTime=0;
     @SubscribeEvent
     public static void onTagsUpdatedEvent(TagsUpdatedEvent tagsUpdatedEvent) {
-        if (tagsUpdatedEvent.getUpdateCause() == TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED) {
+        long l = System.currentTimeMillis();
+        if (l-lastTime>1000) {
             IrisHook.reload();
+            lastTime=l;
         }
     }
 

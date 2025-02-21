@@ -194,14 +194,13 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_min_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    implementation fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-1.19.2:1.2.2")
+    implementation fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-1.18.2:1.0.4")
 
 
-    onlyMainRuntimeOnly fg.deobf("curse.maven:embeddium-908741:5539178")
+    onlyMainRuntimeOnly fg.deobf("curse.maven:embeddium-908741:5322305")
+    onlyMainRuntimeOnly fg.deobf("curse.maven:oculus-581495:4578744")
 
-    onlyMainRuntimeOnly fg.deobf("curse.maven:oculus-581495:6020961")
-
-    compileOnly fg.deobf("curse.maven:oculus-581495:6020961")
+    compileOnly fg.deobf("curse.maven:oculus-581495:4578744")
 
 
 //    Some jar contains jarjar, we need to extract it and delete the file

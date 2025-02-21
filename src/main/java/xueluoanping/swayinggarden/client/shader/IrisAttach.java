@@ -1,5 +1,6 @@
 package xueluoanping.swayinggarden.client.shader;
 
+import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -150,19 +151,8 @@ public class IrisAttach {
     }
 
     public static BlockState parseBlock(String s) {
-        try {
-            BlockStateParser.BlockResult blockstateparser$blockresult = BlockStateParser.parseForBlock(Registry.BLOCK, s, true);
-            return blockstateparser$blockresult.blockState();
-        } catch (CommandSyntaxException ignored) {
-        }
-        return null;
-    }
-
-    public static void copyWheat(@Nonnull Object2IntMap<BlockState> blockStateIds, BlockState base, @Nonnull String shader) {
-        BlockState blockState = Blocks.WHEAT.defaultBlockState();
-        for (BlockState block1 : getBlocks(General.wheatLike.get())) {
-            copy(blockStateIds, blockState, block1);
-        }
+        BlockStateParser blockstateparser$blockresult =new  BlockStateParser(new StringReader(s), false);
+        return blockstateparser$blockresult.getState();
     }
 
     private static void copy(Object2IntMap<BlockState> blockStateIds, String shaderpack, List<? extends String> strings, BlockState blockState) {

@@ -7,15 +7,13 @@ import net.coderbot.iris.block_rendering.BlockRenderingSettings;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import xueluoanping.swayinggarden.client.shader.IAttach;
 import xueluoanping.swayinggarden.client.shader.IrisAttach;
 
 @Mixin(BlockRenderingSettings.class)
-public abstract class MixinWorldRenderingSettings implements IAttach {
+public abstract class MixinWorldRenderingSettings {
 
     @Shadow(remap = false) private boolean reloadRequired;
 
@@ -28,9 +26,5 @@ public abstract class MixinWorldRenderingSettings implements IAttach {
         }
     }
 
-    @Override
-    @Unique
-    public void swaying_garden$set(boolean yes) {
-       this.reloadRequired=yes;
-    }
+
 }
