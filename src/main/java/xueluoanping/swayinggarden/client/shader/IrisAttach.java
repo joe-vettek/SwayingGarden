@@ -6,7 +6,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.ResourceLocationException;
 import net.minecraft.commands.arguments.blocks.BlockStateParser;
 import net.minecraft.core.HolderSet;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import xueluoanping.swayinggarden.config.General;
 import xueluoanping.swayinggarden.util.TagUtil;
@@ -74,7 +75,7 @@ public class IrisAttach {
                     String classStringSplit = string.split("!")[1];
                     try {
                         Class<?> aClass = Class.forName(classStringSplit);
-                        for (Map.Entry<ResourceKey<Block>, Block> blockEntry : BuiltInRegistries.BLOCK.entrySet()) {
+                        for (Map.Entry<ResourceKey<Block>, Block> blockEntry : Registry.BLOCK.entrySet()) {
                             if (blockEntry.getValue().getClass().equals(aClass)) {
                                 blocks2.addAll(blockEntry.getValue().getStateDefinition().getPossibleStates());
                             }
@@ -86,7 +87,7 @@ public class IrisAttach {
                     String classStringSplit = string.split("~")[1];
                     try {
                         Class<?> aClass = Class.forName(classStringSplit);
-                        for (Map.Entry<ResourceKey<Block>, Block> blockEntry : BuiltInRegistries.BLOCK.entrySet()) {
+                        for (Map.Entry<ResourceKey<Block>, Block> blockEntry : Registry.BLOCK.entrySet()) {
                             if (aClass.isAssignableFrom(blockEntry.getValue().getClass())) {
                                 blocks2.addAll(blockEntry.getValue().getStateDefinition().getPossibleStates());
                             }
@@ -97,13 +98,13 @@ public class IrisAttach {
                 } else if (string.startsWith("#")) {
                     string = string.split("#")[1];
                     TagKey<Block> blockTagKey = TagUtil.create(string);
-                    Optional<HolderSet.Named<Block>> tag = BuiltInRegistries.BLOCK.getTag(blockTagKey);
+                    Optional<HolderSet.Named<Block>> tag = Registry.BLOCK.getTag(blockTagKey);
                     tag.ifPresent(c -> c.stream().forEach(
                             d -> blocks2.addAll(d.value().getStateDefinition().getPossibleStates())
                     ));
                 } else {
                     Pattern pattern = Pattern.compile(string);
-                    for (Map.Entry<ResourceKey<Block>, Block> blockEntry : BuiltInRegistries.BLOCK.entrySet()) {
+                    for (Map.Entry<ResourceKey<Block>, Block> blockEntry : Registry.BLOCK.entrySet()) {
                         if (pattern.matcher(blockEntry.getKey().location().toString()).matches()) {
                             blocks2.addAll(blockEntry.getValue().getStateDefinition().getPossibleStates());
                         }
@@ -150,7 +151,7 @@ public class IrisAttach {
 
     public static BlockState parseBlock(String s) {
         try {
-            BlockStateParser.BlockResult blockstateparser$blockresult = BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), s, true);
+            BlockStateParser.BlockResult blockstateparser$blockresult = BlockStateParser.parseForBlock(Registry.BLOCK, s, true);
             return blockstateparser$blockresult.blockState();
         } catch (CommandSyntaxException ignored) {
         }
