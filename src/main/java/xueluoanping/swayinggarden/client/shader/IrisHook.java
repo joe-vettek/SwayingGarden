@@ -2,13 +2,13 @@ package xueluoanping.swayinggarden.client.shader;
 
 import net.irisshaders.iris.Iris;
 import net.irisshaders.iris.shaderpack.materialmap.WorldRenderingSettings;
-import xueluoanping.swayinggarden.util.Platform;
+import xueluoanping.swayinggarden.mixin.SimpleMixinPlugin;
 
-public class OculusHook {
+public class IrisHook {
 
     public static void reload() {
-        if (Platform.isModLoaded("oculus")) {
-            OculusAttach.reload(WorldRenderingSettings.INSTANCE.getBlockStateIds(), Iris.getIrisConfig().getShaderPackName().orElse(""));
+        if (SimpleMixinPlugin.isIrisLikeLoad()) {
+            IrisAttach.reload(WorldRenderingSettings.INSTANCE.getBlockStateIds(), Iris.getIrisConfig().getShaderPackName().orElse(""));
             ((IAttach) WorldRenderingSettings.INSTANCE).swaying_garden$set(true);
         }
     }

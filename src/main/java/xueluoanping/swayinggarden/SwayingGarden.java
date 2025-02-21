@@ -2,6 +2,7 @@ package xueluoanping.swayinggarden;
 
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -25,55 +26,11 @@ public class SwayingGarden {
     public static final String MOD_ID = "swaying_garden";
     // Directly reference a log4j logger.
     public static final Logger LOGGER = LogManager.getLogger();
-
     public static final boolean useLogger = Objects.equals(System.getProperty("forgegradle.runs.dev"), "true");
-    public static final String NETWORK_VERSION = "1.0";
 
     @SuppressWarnings("removal")
-    public SwayingGarden() {
-        // Register the setup method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        // Register the enqueueIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        // Register the processIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-        // Register the doClientStuff method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherData);
-
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
-
+    public SwayingGarden(net.minecraftforge.api.distmarker.Dist dist) {
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, General.CLIENT_CONFIG);
-    }
-
-
-    private void setup(final FMLCommonSetupEvent event) {
-
-    }
-
-    private void doClientStuff(final FMLClientSetupEvent event) {
-        // do something that can only be done on the client
-        //        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().options);
-    }
-
-    private void enqueueIMC(final InterModEnqueueEvent event) {
-        // some example code to dispatch IMC to another mod
-        //        InterModComms.sendTo("examplemod", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
-    }
-
-    private void processIMC(final InterModProcessEvent event) {
-        // some example code to receive and process InterModComms from other mods
-        //        LOGGER.info("Got IMC {}", event.getIMCStream().
-        //                map(m->m.getMessageSupplier().get()).
-        //                collect(Collectors.toList()));
-
-    }
-
-
-    public void gatherData(final GatherDataEvent event) {
-        start.dataGen(event);
     }
 
     public static void logger(Object... x) {

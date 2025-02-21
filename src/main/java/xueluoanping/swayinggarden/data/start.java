@@ -8,7 +8,6 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import xueluoanping.swayinggarden.SwayingGarden;
 import xueluoanping.swayinggarden.data.lang.Lang_EN;
 import xueluoanping.swayinggarden.data.lang.Lang_ZH;
-import xueluoanping.swayinggarden.data.tag.TagsDataProvider;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -23,10 +22,6 @@ public class start {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         if (event.includeServer()) {
             SwayingGarden.logger("Generate We Data!!!");
-
-            TagsDataProvider blockTags = new TagsDataProvider(packOutput, lookupProvider, MODID, helper);
-            generator.addProvider(event.includeServer(), blockTags);
-
         }
 
         if (event.includeClient()) {

@@ -28,7 +28,7 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-public class OculusAttach {
+public class IrisAttach {
 
     public static void reload(@Nullable Object2IntMap<BlockState> blockStateIds, @Nullable String shaderpack) {
         if (shaderpack == null) shaderpack = "";

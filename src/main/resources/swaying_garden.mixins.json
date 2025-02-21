@@ -4,12 +4,13 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "swayinggarden.refmap.json",
   "mixins": [
-    "MixinClientClientLevel"
+    "MixinWorldRenderingSettings"
   ],
   "client": [
   ],
   "injectors": {
     "defaultRequire": 1
   },
+  "plugin": "xueluoanping.swayinggarden.mixin.SimpleMixinPlugin",
   "minVersion": "0.8"
 }

@@ -12,10 +12,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xueluoanping.swayinggarden.client.shader.IAttach;
-import xueluoanping.swayinggarden.client.shader.OculusAttach;
+import xueluoanping.swayinggarden.client.shader.IrisAttach;
 
 @Mixin(WorldRenderingSettings.class)
-public abstract class MixinClientClientLevel implements IAttach {
+public abstract class MixinWorldRenderingSettings implements IAttach {
 
     @Shadow(remap = false) private boolean reloadRequired;
 
@@ -24,7 +24,7 @@ public abstract class MixinClientClientLevel implements IAttach {
     @Inject(at = {@At("RETURN")}, method = {"setBlockStateIds"},require = 0,remap = false)
     private void ecliptic$reload(CallbackInfo ci) {
         if(reloadRequired){
-            OculusAttach.reload(blockStateIds,Iris.getIrisConfig().getShaderPackName().orElse(""));
+            IrisAttach.reload(blockStateIds,Iris.getIrisConfig().getShaderPackName().orElse(""));
         }
     }
 
