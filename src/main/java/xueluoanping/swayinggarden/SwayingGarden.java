@@ -1,7 +1,7 @@
 package xueluoanping.swayinggarden;
 
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -19,7 +19,6 @@ public class SwayingGarden {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final boolean useLogger = Objects.equals(System.getProperty("forgegradle.runs.dev"), "true");
 
-    @SuppressWarnings("removal")
     public SwayingGarden() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, General.CLIENT_CONFIG);
     }

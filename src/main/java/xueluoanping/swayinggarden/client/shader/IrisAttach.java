@@ -2,22 +2,25 @@ package xueluoanping.swayinggarden.client.shader;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import it.unimi.dsi.fastutil.Pair;
+import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import net.minecraft.ResourceLocationException;
-import net.minecraft.commands.arguments.blocks.BlockStateParser;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DoublePlantBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.DoublePlantBlock;
+import net.minecraft.command.arguments.BlockStateParser;
+import net.minecraft.state.Property;
+import net.minecraft.state.properties.DoubleBlockHalf;
+import net.minecraft.tags.ITag;
+import net.minecraft.tags.ITagCollection;
+import net.minecraft.tags.TagCollectionManager;
+import net.minecraft.util.RegistryKey;
+import net.minecraft.util.ResourceLocationException;
+import net.minecraft.util.registry.Registry;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.jetbrains.annotations.NotNull;
+
+import xueluoanping.swayinggarden.SwayingGarden;
 import xueluoanping.swayinggarden.config.General;
 import xueluoanping.swayinggarden.util.TagUtil;
 
@@ -50,13 +53,13 @@ public class IrisAttach {
         }
     }
 
-    public static void copyCustom(@NotNull Object2IntMap<BlockState> blockStateIds, @NotNull String shaderpack) {
+    public static void copyCustom( Object2IntMap<BlockState> blockStateIds,  String shaderpack) {
         for (String string : General.customLike.get()) {
             String[] split = string.split("@");
             if (split.length == 2) {
                 BlockState blockState = parseBlock(split[0]);
                 if (blockState != null) {
-                    copy(blockStateIds, shaderpack, List.of(split[1]), blockState);
+                    copy(blockStateIds, shaderpack, General.of(split[1]), blockState);
                 }
             }
         }
@@ -76,7 +79,7 @@ public class IrisAttach {
                     String classStringSplit = string.split("!")[1];
                     try {
                         Class<?> aClass = Class.forName(classStringSplit);
-                        for (Map.Entry<ResourceKey<Block>, Block> blockEntry : Registry.BLOCK.entrySet()) {
+                        for (Map.Entry<RegistryKey<Block>, Block> blockEntry : Registry.BLOCK.entrySet()) {
                             if (blockEntry.getValue().getClass().equals(aClass)) {
                                 blocks2.addAll(blockEntry.getValue().getStateDefinition().getPossibleStates());
                             }
@@ -88,7 +91,7 @@ public class IrisAttach {
                     String classStringSplit = string.split("~")[1];
                     try {
                         Class<?> aClass = Class.forName(classStringSplit);
-                        for (Map.Entry<ResourceKey<Block>, Block> blockEntry : Registry.BLOCK.entrySet()) {
+                        for (Map.Entry<RegistryKey<Block>, Block> blockEntry : Registry.BLOCK.entrySet()) {
                             if (aClass.isAssignableFrom(blockEntry.getValue().getClass())) {
                                 blocks2.addAll(blockEntry.getValue().getStateDefinition().getPossibleStates());
                             }
@@ -98,14 +101,13 @@ public class IrisAttach {
                     }
                 } else if (string.startsWith("#")) {
                     string = string.split("#")[1];
-                    TagKey<Block> blockTagKey = TagUtil.create(string);
-                    Optional<HolderSet.Named<Block>> tag = Registry.BLOCK.getTag(blockTagKey);
-                    tag.ifPresent(c -> c.stream().forEach(
-                            d -> blocks2.addAll(d.value().getStateDefinition().getPossibleStates())
-                    ));
+                    ITag<Block> blockTagKey = TagUtil.create(string);
+                    for (Block value : blockTagKey.getValues()) {
+                        blocks2.addAll(value.getStateDefinition().getPossibleStates());
+                    }
                 } else {
                     Pattern pattern = Pattern.compile(string);
-                    for (Map.Entry<ResourceKey<Block>, Block> blockEntry : Registry.BLOCK.entrySet()) {
+                    for (Map.Entry<RegistryKey<Block>, Block> blockEntry : Registry.BLOCK.entrySet()) {
                         if (pattern.matcher(blockEntry.getKey().location().toString()).matches()) {
                             blocks2.addAll(blockEntry.getValue().getStateDefinition().getPossibleStates());
                         }
@@ -129,8 +131,8 @@ public class IrisAttach {
                         for (int i = 0; i < blocks2.size(); i++) {
                             BlockState blockState = blocks2.get(i);
                             for (Property<?> property : blockState.getValues().keySet()) {
-                                if (pair.first().matcher(property.getName()).matches()) {
-                                    if (pair.second().matcher(blockState.getValue(property).toString()).matches()) {
+                                if (pair.getFirst().matcher(property.getName()).matches()) {
+                                    if (pair.getSecond().matcher(blockState.getValue(property).toString()).matches()) {
                                         continue;
                                     } else {
                                         blocks2.remove(i);
@@ -173,7 +175,7 @@ public class IrisAttach {
     public static void copy(@Nonnull Object2IntMap<BlockState> blockStateIds, BlockState state, BlockState aim) {
         int idsInt = blockStateIds.getInt(state);
         if (idsInt != blockStateIds.defaultReturnValue()) {
-            blockStateIds.putIfAbsent(aim, idsInt);
+            int i = blockStateIds.putIfAbsent(aim, idsInt);
         }
     }
 }

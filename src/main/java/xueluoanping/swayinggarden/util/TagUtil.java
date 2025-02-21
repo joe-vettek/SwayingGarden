@@ -1,12 +1,12 @@
 package xueluoanping.swayinggarden.util;
 
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.block.Block;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ITag;
+import net.minecraft.util.ResourceLocation;
 
 public class TagUtil {
-    public static TagKey<Block> create(String pName) {
-        return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(pName));
+    public static ITag<Block> create(String pName) {
+        return BlockTags.getAllTags().getTagOrEmpty(new ResourceLocation(pName));
     }
 }

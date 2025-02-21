@@ -26,7 +26,7 @@ version = "${minecraft_min_version}-forge-${mod_version}"
 group = "${mod_base_package}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = mod_id
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17) // Mojang ships Java 8 to end users, so your mod should target Java 8.
+java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 
@@ -194,13 +194,15 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_min_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    implementation fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-1.18.2:1.0.4")
+    implementation fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-1.16.5:0.10.5")
+
+    onlyMainRuntimeOnly fg.deobf("curse.maven:generic-ecosphere-487769:3559153")
 
 
-    onlyMainRuntimeOnly fg.deobf("curse.maven:embeddium-908741:5322305")
-    onlyMainRuntimeOnly fg.deobf("curse.maven:oculus-581495:4578744")
+    onlyMainRuntimeOnly fg.deobf("curse.maven:embeddium-908741:5322311")
+    onlyMainRuntimeOnly fg.deobf("curse.maven:oculus-581495:5194273")
 
-    compileOnly fg.deobf("curse.maven:oculus-581495:4578744")
+    compileOnly fg.deobf("curse.maven:oculus-581495:5194273")
 
 
 //    Some jar contains jarjar, we need to extract it and delete the file

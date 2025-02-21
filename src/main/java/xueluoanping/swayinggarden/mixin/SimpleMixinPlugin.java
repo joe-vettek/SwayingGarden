@@ -1,13 +1,10 @@
 package xueluoanping.swayinggarden.mixin;
 
-import net.minecraftforge.fml.loading.FMLLoader;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -38,7 +35,8 @@ public class SimpleMixinPlugin implements IMixinConfigPlugin {
 
         if (isIrisLikeLoad == 0) {
             try {
-                Class<?> ignored = Class.forName("net.coderbot.iris.block_rendering.BlockRenderingSettings");
+
+                Class<?> ignored = Class.forName("net.coderbot.iris.block_rendering.BlockRenderingSettings", false, ClassLoader.getSystemClassLoader());
                 isIrisLikeLoad = 1;
             } catch (Exception ignored) {
                 isIrisLikeLoad = 2;
