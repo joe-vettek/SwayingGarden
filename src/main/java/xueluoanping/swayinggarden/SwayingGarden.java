@@ -29,7 +29,7 @@ public class SwayingGarden {
     public static final boolean useLogger = Objects.equals(System.getProperty("forgegradle.runs.dev"), "true");
 
     @SuppressWarnings("removal")
-    public SwayingGarden(net.minecraftforge.api.distmarker.Dist dist) {
+    public SwayingGarden() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, General.CLIENT_CONFIG);
     }
 
