@@ -21,45 +21,10 @@ public class General {
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> leavesLike;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> customLike;
 
-    public static boolean isValidRegex2(Object o) {
-        if (!(o instanceof String regex)) {
-            return false;
-        }
-        if (regex.contains("@")) {
-            String[] split = regex.split("@");
-            if (split[1].split("@").length != 2) return false;
-            return isValidRegex(split[1]);
-        } else {
-            return false;
-        }
-    }
-
     public static boolean isValidRegex(Object o) {
         if (!(o instanceof String regex)) {
             return false;
-        }
-        try {
-            if (regex.contains("%")) {
-                String[] split = regex.split("%");
-                String[] strings = split[1].split(":");
-                if (strings.length < 2 && strings.length % 2 == 1) return false;
-                regex = split[0];
-            }
-            if (regex.startsWith("!")) {
-                return regex.split("!").length != 2;
-            }
-            if (regex.startsWith("~")) {
-                return regex.split("~").length != 2;
-            }
-            if (regex.startsWith("#")) {
-                TagUtil.create(regex);
-                return true;
-            }
-            Pattern.compile(regex);
-            return true;
-        } catch (PatternSyntaxException | ResourceLocationException e) {
-            return false;
-        }
+        }return true;
     }
 
     static {
@@ -103,7 +68,7 @@ public class General {
                         "environmental:large_lily_pad"), General::isValidRegex);
 
         customLike = COMMON_BUILDER.comment("List of custom-like plants, use '@' to split template and targets, template string can get from F3+i at target blocks, such as minecraft:tall_grass[half=lower]@#minecraft:tall_flowers[half=lower].")
-                .define("Custom Like", List.of("minecraft:vine@teastory:rice_plant"), General::isValidRegex2);
+                .define("Custom Like", List.of("minecraft:vine@teastory:rice_plant"), General::isValidRegex);
 
 
         COMMON_BUILDER.pop();
