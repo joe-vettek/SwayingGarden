@@ -23,47 +23,10 @@ public class General {
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> leavesLike;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> customLike;
 
-    public static boolean isValidRegex2(Object o) {
-        if (!(o instanceof String )) {
-            return false;
-        }
-        String regex= (String) o;
-        if (regex.contains("@")) {
-            String[] split = regex.split("@");
-            if (split[1].split("@").length != 2) return false;
-            return isValidRegex(split[1]);
-        } else {
-            return false;
-        }
-    }
-
     public static boolean isValidRegex(Object o) {
-        if (!(o instanceof String )) {
+        if (!(o instanceof String regex)) {
             return false;
-        }
-        String regex= (String) o;
-        try {
-            if (regex.contains("%")) {
-                String[] split = regex.split("%");
-                String[] strings = split[1].split(":");
-                if (strings.length < 2 && strings.length % 2 == 1) return false;
-                regex = split[0];
-            }
-            if (regex.startsWith("!")) {
-                return regex.split("!").length != 2;
-            }
-            if (regex.startsWith("~")) {
-                return regex.split("~").length != 2;
-            }
-            if (regex.startsWith("#")) {
-                TagUtil.create(regex);
-                return true;
-            }
-            Pattern.compile(regex);
-            return true;
-        } catch (PatternSyntaxException | ResourceLocationException e) {
-            return false;
-        }
+        }return true;
     }
     
     public static List<String> of(String... strings){
