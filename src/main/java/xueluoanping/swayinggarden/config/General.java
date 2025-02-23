@@ -24,7 +24,7 @@ public class General {
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> customLike;
 
     public static boolean isValidRegex(Object o) {
-        if (!(o instanceof String regex)) {
+        if (!(o instanceof String )) {
             return false;
         }return true;
     }
@@ -74,7 +74,7 @@ public class General {
                         "environmental:large_lily_pad"), General::isValidRegex);
 
         customLike = COMMON_BUILDER.comment("List of custom-like plants, use '@' to split template and targets, template string can get from F3+i at target blocks, such as minecraft:tall_grass[half=lower]@#minecraft:tall_flowers[half=lower].")
-                .define("Custom Like", of("minecraft:vine@teastory:rice_plant"), General::isValidRegex2);
+                .define("Custom Like", of("minecraft:vine@teastory:rice_plant"), General::isValidRegex);
 
 
         COMMON_BUILDER.pop();
