@@ -1,13 +1,13 @@
 package xueluoanping.swayinggarden.handler;
 
 
-import net.minecraftforge.event.TagsUpdatedEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.TagsUpdatedEvent;
 import xueluoanping.swayinggarden.SwayingGarden;
 import xueluoanping.swayinggarden.client.shader.IrisHook;
 
-@Mod.EventBusSubscriber(modid = SwayingGarden.MOD_ID)
+@EventBusSubscriber(modid = SwayingGarden.MOD_ID)
 public class AllListener {
 
     @SubscribeEvent

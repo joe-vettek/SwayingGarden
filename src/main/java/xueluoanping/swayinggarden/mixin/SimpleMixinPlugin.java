@@ -1,19 +1,12 @@
 package xueluoanping.swayinggarden.mixin;
 
-import net.minecraftforge.fml.loading.FMLLoader;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
-/**
- * Non-critical mixin config plugin, just disables mixins if Distant Horizons isn't present,
- * since otherwise the log gets spammed with warnings.
- */
 public class SimpleMixinPlugin implements IMixinConfigPlugin {
 
 

@@ -1,21 +1,20 @@
 package xueluoanping.swayinggarden.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import xueluoanping.swayinggarden.SwayingGarden;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.List;
 
 public class General {
-    public static ForgeConfigSpec CLIENT_CONFIG;
-    public static ForgeConfigSpec.ConfigValue<List<? extends String>> wheatLike;
-    public static ForgeConfigSpec.ConfigValue<List<? extends String>> grassLike;
-    public static ForgeConfigSpec.ConfigValue<List<? extends String>> saplingLike;
-    public static ForgeConfigSpec.ConfigValue<List<? extends String>> doubleBlockPlantsTops;
-    public static ForgeConfigSpec.ConfigValue<List<? extends String>> doubleBlockPlantsBottoms;
-    public static ForgeConfigSpec.ConfigValue<List<? extends String>> vineLike;
-    public static ForgeConfigSpec.ConfigValue<List<? extends String>> padLike;
-    public static ForgeConfigSpec.ConfigValue<List<? extends String>> leavesLike;
-    public static ForgeConfigSpec.ConfigValue<List<? extends String>> customLike;
+    public static ModConfigSpec CLIENT_CONFIG;
+    public static ModConfigSpec.ConfigValue<List<? extends String>> wheatLike;
+    public static ModConfigSpec.ConfigValue<List<? extends String>> grassLike;
+    public static ModConfigSpec.ConfigValue<List<? extends String>> saplingLike;
+    public static ModConfigSpec.ConfigValue<List<? extends String>> doubleBlockPlantsTops;
+    public static ModConfigSpec.ConfigValue<List<? extends String>> doubleBlockPlantsBottoms;
+    public static ModConfigSpec.ConfigValue<List<? extends String>> vineLike;
+    public static ModConfigSpec.ConfigValue<List<? extends String>> padLike;
+    public static ModConfigSpec.ConfigValue<List<? extends String>> leavesLike;
+    public static ModConfigSpec.ConfigValue<List<? extends String>> customLike;
 
 
 
@@ -26,7 +25,7 @@ public class General {
     }
 
     static {
-        ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
+        ModConfigSpec.Builder COMMON_BUILDER = new ModConfigSpec.Builder();
 
         COMMON_BUILDER.comment("This mod is designed to make it easier for modded plant blocks to quickly support shaders effects, preventing them from awkwardly standing in swaying blossom.");
         COMMON_BUILDER.comment("Base settings")

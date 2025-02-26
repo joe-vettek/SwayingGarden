@@ -7,6 +7,6 @@ import net.minecraft.world.level.block.Block;
 
 public class TagUtil {
     public static TagKey<Block> create(String pName) {
-        return TagKey.create(Registries.BLOCK, new ResourceLocation(pName));
+        return TagKey.create(Registries.BLOCK, ResourceLocation.parse(pName));
     }
 }

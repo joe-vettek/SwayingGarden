@@ -40,7 +40,7 @@ public class IrisAttach {
             copy(blockStateIds, shaderpack, General.doubleBlockPlantsBottoms.get(), Blocks.TALL_GRASS.defaultBlockState().setValue(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
 
             copy(blockStateIds, shaderpack, General.wheatLike.get(), Blocks.WHEAT.defaultBlockState());
-            copy(blockStateIds, shaderpack, General.grassLike.get(), Blocks.GRASS.defaultBlockState());
+            copy(blockStateIds, shaderpack, General.grassLike.get(), Blocks.SHORT_GRASS.defaultBlockState());
             copy(blockStateIds, shaderpack, General.leavesLike.get(), Blocks.OAK_LEAVES.defaultBlockState());
             copy(blockStateIds, shaderpack, General.saplingLike.get(), Blocks.OAK_SAPLING.defaultBlockState());
             copy(blockStateIds, shaderpack, General.vineLike.get(), Blocks.VINE.defaultBlockState());

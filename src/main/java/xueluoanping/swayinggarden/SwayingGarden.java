@@ -2,17 +2,11 @@ package xueluoanping.swayinggarden;
 
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import xueluoanping.swayinggarden.config.General;
@@ -28,9 +22,9 @@ public class SwayingGarden {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final boolean useLogger = Objects.equals(System.getProperty("forgegradle.runs.dev"), "true");
 
-    @SuppressWarnings("removal")
-    public SwayingGarden() {
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, General.CLIENT_CONFIG);
+
+    public SwayingGarden(IEventBus modEventBus, ModContainer modContainer) {
+        modContainer.registerConfig(ModConfig.Type.CLIENT, General.CLIENT_CONFIG);
     }
 
     public static void logger(Object... x) {
@@ -52,6 +46,6 @@ public class SwayingGarden {
     }
 
     public static ResourceLocation rl(String name) {
-        return new ResourceLocation(SwayingGarden.MOD_ID, name);
+        return ResourceLocation.fromNamespaceAndPath(SwayingGarden.MOD_ID, name);
     }
 }
