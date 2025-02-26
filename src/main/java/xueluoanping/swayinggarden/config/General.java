@@ -1,13 +1,9 @@
 package xueluoanping.swayinggarden.config;
 
-import net.minecraft.ResourceLocationException;
 import net.minecraftforge.common.ForgeConfigSpec;
-import xueluoanping.swayinggarden.util.TagUtil;
+import xueluoanping.swayinggarden.SwayingGarden;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 public class General {
     public static ForgeConfigSpec CLIENT_CONFIG;
@@ -24,7 +20,7 @@ public class General {
 
 
     public static boolean isValidRegex(Object o) {
-        if (!(o instanceof String regex)) {
+        if (!(o instanceof String)) {
             return false;
         }return true;
     }
