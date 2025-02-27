@@ -97,7 +97,7 @@ public class IrisAttach {
                 } else if (string.startsWith("#")) {
                     string = string.split("#")[1];
                     TagKey<Block> blockTagKey = TagUtil.create(string);
-                    Optional<HolderSet.Named<Block>> tag = BuiltInRegistries.BLOCK.getTag(blockTagKey);
+                    Optional<HolderSet.Named<Block>> tag = BuiltInRegistries.BLOCK.get(blockTagKey);
                     tag.ifPresent(c -> c.stream().forEach(
                             d -> blocks2.addAll(d.value().getStateDefinition().getPossibleStates())
                     ));
@@ -150,7 +150,7 @@ public class IrisAttach {
 
     public static BlockState parseBlock(String s) {
         try {
-            BlockStateParser.BlockResult blockstateparser$blockresult = BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), s, true);
+            BlockStateParser.BlockResult blockstateparser$blockresult = BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.filterElements(block -> true), s, true);
             return blockstateparser$blockresult.blockState();
         } catch (CommandSyntaxException ignored) {
         }

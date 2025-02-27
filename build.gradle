@@ -103,7 +103,15 @@ runs {
         systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
     }
 
-    data {
+    clientData {
+        // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
+        // workingDirectory project.file('run-data')
+
+        // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+    }
+
+    serverData {
         // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
         // workingDirectory project.file('run-data')
 
@@ -134,20 +142,12 @@ dependencies {
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation "net.neoforged:neoforge:${neo_version}"
 
-    onlyMainRuntimeOnly("curse.maven:jei-238222:5606861")
-//    implementation ("curse.maven:jade-324717:4654448")
-    onlyMainRuntimeOnly("curse.maven:jade-324717:5591256")
 
-    compileOnly("curse.maven:irisshaders-455508:6117625")
+    compileOnly("curse.maven:irisshaders-455508:6213645")
 
-    onlyMainRuntimeOnly("curse.maven:irisshaders-455508:6117625")
-    onlyMainRuntimeOnly "maven.modrinth:sodium:mc1.21.1-0.6.5-neoforge"
+    onlyMainRuntimeOnly("curse.maven:irisshaders-455508:6213645")
+    onlyMainRuntimeOnly "maven.modrinth:sodium:mc1.21.4-0.6.9-neoforge"
 
-
-    onlyMainRuntimeOnly("curse.maven:journeymap-32274:5541925")
-
-    onlyMainRuntimeOnly("curse.maven:spark-361579:5434153")
-    onlyMainRuntimeOnly("curse.maven:farmers-delight-398521:5772720")
 
     println("----Scan onlyMainRuntimeOnly libs begin----")
     fileTree(dir: 'libs', include: ['*.jar']).each { File file ->
