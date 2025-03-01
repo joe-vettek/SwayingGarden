@@ -19,7 +19,7 @@ import xueluoanping.swayinggarden.data.start;
 import java.util.Objects;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod(SwayingGarden.MOD_ID)
+@Mod(value = SwayingGarden.MOD_ID,dist = Dist.CLIENT)
 public class SwayingGarden {
     public static final String MOD_ID = "swaying_garden";
     // Directly reference a log4j logger.

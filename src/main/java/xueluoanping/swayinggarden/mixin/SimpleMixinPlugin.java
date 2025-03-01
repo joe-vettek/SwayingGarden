@@ -31,7 +31,7 @@ public class SimpleMixinPlugin implements IMixinConfigPlugin {
 
         if (isIrisLikeLoad == 0) {
             try {
-                Class<?> ignored = Class.forName("net.irisshaders.iris.shaderpack.materialmap.WorldRenderingSettings", false, ClassLoader.getSystemClassLoader());
+                // Class<?> ignored = Class.forName("net.irisshaders.iris.shaderpack.materialmap.WorldRenderingSettings", false, ClassLoader.getSystemClassLoader());
 
                 isIrisLikeLoad = 1;
             } catch (Exception ignored) {

@@ -17,11 +17,11 @@ public class General {
     public static ModConfigSpec.ConfigValue<List<? extends String>> customLike;
 
 
-
     public static boolean isValidRegex(Object o) {
         if (!(o instanceof String)) {
             return false;
-        }return true;
+        }
+        return true;
     }
 
     static {
@@ -32,40 +32,50 @@ public class General {
                 .comment("Tags or regular expressions are allowed. Tags must start with # and not use regex. Also ! to target class is available (use ~ if want to get more matches). Use % to add state check.")
                 .push("Base");
         wheatLike = COMMON_BUILDER.comment("List of small crops.")
-                .defineListAllowEmpty("Wheat Like", List.of("~net.minecraft.world.level.block.CropBlock"), General::isValidRegex);
+                .defineListAllowEmpty("Wheat Like",
+                        List.of("~net.minecraft.world.level.block.CropBlock"),
+                        () -> "", General::isValidRegex);
 
         grassLike = COMMON_BUILDER.comment("List of small flowers and grasses.")
                 .defineListAllowEmpty("Grass Like", List.of("#minecraft:small_flowers",
                         "regions_unexplored:clover",
-                        "biomesoplenty:clover"), General::isValidRegex);
+                        "biomesoplenty:clover"),
+                        () -> "", General::isValidRegex);
 
         saplingLike = COMMON_BUILDER.comment("List of small saplings.")
-                .defineListAllowEmpty("Sapling Like", List.of("#minecraft:saplings", ".*berry_bush"), General::isValidRegex);
+                .defineListAllowEmpty("Sapling Like", List.of("#minecraft:saplings", ".*berry_bush"),
+                        () -> "", General::isValidRegex);
 
         doubleBlockPlantsTops = COMMON_BUILDER.comment("List of upper parts of double block plants.")
-                .defineListAllowEmpty("Double Block Plants Uppers", List.of("#minecraft:tall_flowers%half:upper"), General::isValidRegex);
+                .defineListAllowEmpty("Double Block Plants Uppers", List.of("#minecraft:tall_flowers%half:upper"),
+                        () -> "", General::isValidRegex);
 
         doubleBlockPlantsBottoms = COMMON_BUILDER.comment("List of lower parts of double block plants.")
-                .defineListAllowEmpty("Double Block Plants Lowers", List.of("#minecraft:tall_flowers%half:lower"), General::isValidRegex);
+                .defineListAllowEmpty("Double Block Plants Lowers", List.of("#minecraft:tall_flowers%half:lower"),
+                        () -> "", General::isValidRegex);
 
         vineLike = COMMON_BUILDER.comment("List of small vine-like plants.")
-                .defineListAllowEmpty("Vine Like", List.of("atmospheric:passion_vine"), General::isValidRegex);
+                .defineListAllowEmpty("Vine Like", List.of("atmospheric:passion_vine"),
+                        () -> "", General::isValidRegex);
 
         leavesLike = COMMON_BUILDER.comment("List of small leaf-like plants.")
                 .defineListAllowEmpty("Leaf Like", List.of("#minecraft:leaves",
                         "#dynamictrees:foliage",
                         "environmental:.*_hanging_wisteria_leaves",
                         "environmental:cattail_stalk",
-                        "environmental:cattail"), General::isValidRegex);
+                        "environmental:cattail"),
+                        () -> "", General::isValidRegex);
 
         padLike = COMMON_BUILDER.comment("List of small lily pad-like plants.")
                 .defineListAllowEmpty("Pad Like", List.of("regions_unexplored:flowering_lily_pad",
                         "biomesoplenty:huge_lily_pad",
                         "environmental:giant_lily_pad",
-                        "environmental:large_lily_pad"), General::isValidRegex);
+                        "environmental:large_lily_pad"),
+                        () -> "", General::isValidRegex);
 
         customLike = COMMON_BUILDER.comment("List of custom-like plants, use '@' to split template and targets, template string can get from F3+i at target blocks, such as minecraft:tall_grass[half=lower]@#minecraft:tall_flowers[half=lower].")
-                .defineListAllowEmpty("Custom Like", List.of("minecraft:vine@teastory:rice_plant"), General::isValidRegex);
+                .defineListAllowEmpty("Custom Like", List.of("minecraft:vine@teastory:rice_plant"),
+                        () -> "", General::isValidRegex);
 
 
         COMMON_BUILDER.pop();

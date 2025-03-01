@@ -9,7 +9,11 @@ public class IrisHook {
     public static void reload() {
         if (SimpleMixinPlugin.isIrisLikeLoad()) {
             IrisAttach.reload(WorldRenderingSettings.INSTANCE.getBlockStateIds(), Iris.getIrisConfig().getShaderPackName().orElse(""));
-            ((IAttach) WorldRenderingSettings.INSTANCE).swaying_garden$set(true);
+            try {
+                ((IAttach) WorldRenderingSettings.INSTANCE).swaying_garden$set(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
