@@ -2,11 +2,15 @@ package xueluoanping.swayinggarden;
 
 
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import xueluoanping.swayinggarden.config.General;
@@ -25,6 +29,9 @@ public class SwayingGarden {
 
     public SwayingGarden(IEventBus modEventBus, ModContainer modContainer) {
         modContainer.registerConfig(ModConfig.Type.CLIENT, General.CLIENT_CONFIG);
+        if (FMLLoader.getDist() == Dist.CLIENT)
+            modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+
     }
 
     public static void logger(Object... x) {
