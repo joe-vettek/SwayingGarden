@@ -215,6 +215,8 @@ dependencies {
     onlyMainRuntimeOnly fg.deobf("curse.maven:embeddium-908741:5681725")
     onlyMainRuntimeOnly fg.deobf("curse.maven:oculus-581495:6020952")
 
+    onlyMainRuntimeOnly fg.deobf("curse.maven:configured-457570:5180900")
+
 
 //    Some jar contains jarjar, we need to extract it and delete the file
     println("----Scan libs begin----")
