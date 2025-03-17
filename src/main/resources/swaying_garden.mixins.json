@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "xueluoanping.swayinggarden.mixin",
-  "refmap": "swayinggarden.refmap.json",
+  "refmap": "swaying_garden.refmap.json",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "MixinWorldRenderingSettings"

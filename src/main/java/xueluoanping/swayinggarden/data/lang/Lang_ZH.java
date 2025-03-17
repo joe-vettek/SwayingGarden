@@ -13,8 +13,7 @@ public class Lang_ZH extends LangHelper {
 
     @Override
     protected void addTranslations() {
-        add("menu.create_vault_terminal.tittle","\"%s\"");
-        add("hint.create_vault_terminal.not_open","无法打开存储空间！");
+
     }
 
 

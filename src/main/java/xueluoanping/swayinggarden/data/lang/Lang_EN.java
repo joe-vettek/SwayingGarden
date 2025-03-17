@@ -12,8 +12,7 @@ public class Lang_EN extends LangHelper {
 
     @Override
     protected void addTranslations() {
-        add("menu.create_vault_terminal.tittle","\"%s\"");
-        add("hint.create_vault_terminal.not_open","Can not open the storage block!");
+
     }
 
 

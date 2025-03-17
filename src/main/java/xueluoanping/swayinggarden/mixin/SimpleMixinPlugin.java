@@ -38,9 +38,9 @@ public class SimpleMixinPlugin implements IMixinConfigPlugin {
 
         if (isIrisLikeLoad == 0) {
             try {
-                Class<?> ignored = Class.forName("net.irisshaders.iris.shaderpack.materialmap.WorldRenderingSettings", false, ClassLoader.getSystemClassLoader());
+                // Class<?> ignored = Class.forName("net.irisshaders.iris.shaderpack.materialmap.WorldRenderingSettings");
 
-                isIrisLikeLoad = 1;
+                isIrisLikeLoad = FMLLoader.getLoadingModList().getModFileById("oculus") != null?1:2;
             } catch (Exception ignored) {
                 isIrisLikeLoad = 2;
             }
