@@ -7,6 +7,8 @@ import java.util.List;
 
 public class General {
     public static ForgeConfigSpec CLIENT_CONFIG;
+    public static ForgeConfigSpec.ConfigValue<List<? extends String>> blackList;
+
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> wheatLike;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> grassLike;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> saplingLike;
@@ -32,6 +34,11 @@ public class General {
         COMMON_BUILDER.comment("Base settings")
                 .comment("Tags or regular expressions are allowed. Tags must start with # and not use regex. Also ! to target class is available (use ~ if want to get more matches). Use % to add state check.")
                 .push("Base");
+        blackList = COMMON_BUILDER.comment("List of blocks not applied.")
+                .defineListAllowEmpty("BlackList",
+                        List.of(),
+                        General::isValidRegex);
+
         wheatLike = COMMON_BUILDER.comment("List of small crops.")
                 .defineListAllowEmpty("Wheat Like",
                         List.of("~net.minecraft.world.level.block.CropBlock"),

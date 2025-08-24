@@ -21,31 +21,34 @@ import xueluoanping.swayinggarden.util.TagUtil;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 public class IrisAttach {
+    private static Set<BlockState> blackList = null;
 
     public static void reload(@Nullable Object2IntMap<BlockState> blockStateIds, @Nullable String shaderpack) {
         if (shaderpack == null) shaderpack = "";
 
         if (blockStateIds != null) {
+            blackList = new HashSet<>(getBlocks(General.blackList.get()));
+
             copyCustom(blockStateIds, shaderpack);
 
             copy(blockStateIds, shaderpack, General.doubleBlockPlantsTops.get(), Blocks.TALL_GRASS.defaultBlockState().setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER));
             copy(blockStateIds, shaderpack, General.doubleBlockPlantsBottoms.get(), Blocks.TALL_GRASS.defaultBlockState().setValue(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
 
+            copy(blockStateIds, shaderpack, General.vineLike.get(), Blocks.VINE.defaultBlockState());
+            copy(blockStateIds, shaderpack, General.leavesLike.get(), Blocks.OAK_LEAVES.defaultBlockState());
+            copy(blockStateIds, shaderpack, General.padLike.get(), Blocks.LILY_PAD.defaultBlockState());
+
             copy(blockStateIds, shaderpack, General.wheatLike.get(), Blocks.WHEAT.defaultBlockState());
             copy(blockStateIds, shaderpack, General.grassLike.get(), Blocks.GRASS.defaultBlockState());
-            copy(blockStateIds, shaderpack, General.leavesLike.get(), Blocks.OAK_LEAVES.defaultBlockState());
             copy(blockStateIds, shaderpack, General.saplingLike.get(), Blocks.OAK_SAPLING.defaultBlockState());
-            copy(blockStateIds, shaderpack, General.vineLike.get(), Blocks.VINE.defaultBlockState());
-            copy(blockStateIds, shaderpack, General.padLike.get(), Blocks.LILY_PAD.defaultBlockState());
         }
+
+        blackList = null;
     }
 
     public static void copyCustom(@NotNull Object2IntMap<BlockState> blockStateIds, @NotNull String shaderpack) {
@@ -175,13 +178,15 @@ public class IrisAttach {
         int idsInt = blockStateIds.getInt(state);
         if (idsInt != blockStateIds.defaultReturnValue()) {
             block.getStateDefinition().getPossibleStates()
-                    .forEach(b -> blockStateIds.putIfAbsent(b, idsInt));
+                    .forEach(b -> {
+                        if (!blackList.contains(state)) blockStateIds.putIfAbsent(b, idsInt);
+                    });
         }
     }
 
     public static void copy(@Nonnull Object2IntMap<BlockState> blockStateIds, BlockState state, BlockState aim) {
         int idsInt = blockStateIds.getInt(state);
-        if (idsInt != blockStateIds.defaultReturnValue()) {
+        if (idsInt != blockStateIds.defaultReturnValue() && !blackList.contains(state)) {
             blockStateIds.putIfAbsent(aim, idsInt);
         }
     }
