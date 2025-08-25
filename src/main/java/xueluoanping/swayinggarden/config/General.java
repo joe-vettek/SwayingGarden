@@ -52,16 +52,33 @@ public class General {
                                 "natures_spirit:.*_grass",
                                 "regions_unexplored:.*_grass",
                                 "natures_spirit:.*_fern",
-                                "natures_spirit:sage_succulent"),
-                        General::isValidRegex);
+                                "natures_spirit:sage_succulent",
+                                "terrainslabs:(?!snow)[^:]*_on_top",
+                                "bountifulfares:wild_.*",
+                                "wildernature:hazelnut_bush",
+                                "vinery:.*_grape_bush_.*",
+                                "farm_and_charm:tomato_crop%age=0",
+                                "farmersdelight:budding_tomatoes",
+                                "vinery:.*_grape_bush",
+                                "flower_picking:.*",
+                                "biomesoplenty:.*_grass",
+                                "biomesoplenty:sprout",
+                                "biomeswevegone:.*_grass",
+                                "biomeswevegone:clover_patch"),
+                         General::isValidRegex);
 
         saplingLike = COMMON_BUILDER.comment("List of small saplings.")
                 .defineListAllowEmpty("Sapling Like",
                         List.of("#minecraft:saplings",
                                 ".*berry_bush",
                                 "natures_spirit:.*_bearberries",
-                                "natures_spirit:.*_bitter_sprouts"),
-                        General::isValidRegex);
+                                "natures_spirit:.*_bitter_sprouts",
+                                "biomesoplenty:bush",
+                                "biomesoplenty:tundra_shrub",
+                                "regions_unexplored:.*_shrub",
+                                "biomeswevegone:horseweed",
+                                "biomeswevegone:winter_succulent"),
+                         General::isValidRegex);
 
         doubleBlockPlantsTops = COMMON_BUILDER.comment("List of upper parts of double block plants.")
                 .defineListAllowEmpty("Double Block Plants Uppers",
@@ -71,8 +88,16 @@ public class General {
                                 "natures_spirit:tall_.*_grass%half:upper",
                                 "natures_spirit:large_.*_fern%half:upper",
                                 "regions_unexplored:windswept_grass%half:upper",
-                                "regions_unexplored:cattail%half:upper"),
-                        General::isValidRegex);
+                                "regions_unexplored:cattail%half:upper",
+                                "farm_and_charm:wild_corn%half:upper",
+                                "farm_and_charm:tomato_crop",
+                                "flower_picking:.*%half:upper",
+                                "customized:rice_crop%grow_placed=true",
+                                "biomesoplenty:sea_oats%half=upper",
+                                "biomesoplenty:barley%half=upper",
+                                "regions_unexplored:elephant_ear%half=upper",
+                                "biomeswevegone:tall_.*_grass%half=upper"),
+                         General::isValidRegex);
 
         doubleBlockPlantsBottoms = COMMON_BUILDER.comment("List of lower parts of double block plants.")
                 .defineListAllowEmpty("Double Block Plants Lowers",
@@ -82,23 +107,35 @@ public class General {
                                 "natures_spirit:tall_.*_grass%half:lower",
                                 "natures_spirit:large_.*_fern%half:lower",
                                 "regions_unexplored:windswept_grass%half:lower",
-                                "regions_unexplored:cattail%half:lower"),
-                        General::isValidRegex);
+                                "regions_unexplored:cattail%half:lower",
+                                "farm_and_charm:wild_corn%half:lower",
+                                "farm_and_charm:tomato_crop_body",
+                                "flower_picking:.*%half:lower",
+                                "customized:rice_crop%grow_placed=false",
+                                "biomesoplenty:sea_oats%half=lower",
+                                "biomesoplenty:barley%half=lower",
+                                "regions_unexplored:elephant_ear%half=lower",
+                                "biomeswevegone:tall_.*_grass%half=lower"),
+                         General::isValidRegex);
 
         vineLike = COMMON_BUILDER.comment("List of small vine-like plants.")
                 .defineListAllowEmpty("Vine Like",
                         List.of("atmospheric:passion_vine",
                                 "regions_unexplored:kapok_vines.*",
-                                "natures_spirit:.*_wisteria_vines.*"),
-                        General::isValidRegex);
+                                "natures_spirit:.*_wisteria_vines.*",
+                                "vinery:jungle_grape_bush_white"),
+                         General::isValidRegex);
 
         leavesLike = COMMON_BUILDER.comment("List of small leaf-like plants.")
                 .defineListAllowEmpty("Leaf Like", List.of("#minecraft:leaves",
                                 "#dynamictrees:foliage",
                                 "environmental:.*_hanging_wisteria_leaves",
                                 "environmental:cattail_stalk",
-                                "environmental:cattail"),
-                        General::isValidRegex);
+                                "environmental:cattail",
+                                "biomesoplenty:bramble_leaves",
+                                "biomesoplenty:high_grass.*",
+                                "biomesoplenty:huge_clover_petal"),
+                         General::isValidRegex);
 
         padLike = COMMON_BUILDER.comment("List of small lily pad-like plants.")
                 .defineListAllowEmpty("Pad Like", List.of("regions_unexplored:flowering_lily_pad",
