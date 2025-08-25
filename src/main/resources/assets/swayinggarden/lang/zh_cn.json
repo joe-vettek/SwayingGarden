@@ -1,4 +1,6 @@
 {
+  "swaying_garden.configuration.BlackList": "需要忽略的方块",
+
   "swaying_garden.configuration.Sapling Like": "树苗类植物",
   "swaying_garden.configuration.Double Block Plants Uppers": "高茎植物上层",
   "swaying_garden.configuration.Pad Like": "浮萍类植物",
