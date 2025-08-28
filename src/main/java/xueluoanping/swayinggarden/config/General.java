@@ -93,7 +93,8 @@ public class General {
                                 "biomesoplenty:sea_oats%half=upper",
                                 "biomesoplenty:barley%half=upper",
                                 "regions_unexplored:elephant_ear%half=upper",
-                                "biomeswevegone:tall_.*_grass%half=upper"),
+                                "biomeswevegone:tall_.*_grass%half=upper",
+                                "naturalphilosophy:.*%half=upper"),
                         () -> "", General::isValidRegex);
 
         doubleBlockPlantsBottoms = COMMON_BUILDER.comment("List of lower parts of double block plants.")
@@ -112,7 +113,8 @@ public class General {
                                 "biomesoplenty:sea_oats%half=lower",
                                 "biomesoplenty:barley%half=lower",
                                 "regions_unexplored:elephant_ear%half=lower",
-                                "biomeswevegone:tall_.*_grass%half=lower"),
+                                "biomeswevegone:tall_.*_grass%half=lower",
+                                "naturalphilosophy:.*%half=lower"),
                         () -> "", General::isValidRegex);
 
         vineLike = COMMON_BUILDER.comment("List of small vine-like plants.")
