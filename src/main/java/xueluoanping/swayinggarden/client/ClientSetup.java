@@ -8,7 +8,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import xueluoanping.swayinggarden.SwayingGarden;
 import xueluoanping.swayinggarden.mixin.SimpleMixinPlugin;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(value = Dist.CLIENT)
 public class ClientSetup {
 
     @SubscribeEvent

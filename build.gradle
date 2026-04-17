@@ -3,7 +3,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.192'
+    id 'net.neoforged.gradle.userdev' version '7.1.21'
 }
 
 
@@ -37,12 +37,6 @@ repositories {
             includeGroup "maven.modrinth"
         }
     }
-    maven {
-        url "https://maven.su5ed.dev/releases"
-    }
-    maven {
-        url "https://harleyoconnor.com/maven"
-    }
 }
 
 base {
@@ -53,7 +47,7 @@ base {
 }
 
 // Mojang ships Java 21 to end users starting in 1.20.5, so mods should target Java 21.
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
 //minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
 //minecraft.accessTransformers.entry public net.minecraft.client.Minecraft textureManager # textureManager
@@ -96,20 +90,6 @@ runs {
 //        programArgument '--nogui'
     }
 
-    // This run config launches GameTestServer and runs all registered gametests, then exits.
-    // By default, the server will crash when no gametests are provided.
-    // The gametest system is also enabled by default for other run configs under the /test command.
-    gameTestServer {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-    }
-
-    data {
-        // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
-        // workingDirectory project.file('run-data')
-
-        // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
-    }
 }
 
 
@@ -134,20 +114,8 @@ dependencies {
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation "net.neoforged:neoforge:${neo_version}"
 
-    onlyMainRuntimeOnly("curse.maven:jei-238222:5606861")
-//    implementation ("curse.maven:jade-324717:4654448")
-    onlyMainRuntimeOnly("curse.maven:jade-324717:5591256")
-
-    compileOnly("curse.maven:irisshaders-455508:6117625")
-
-    onlyMainRuntimeOnly("curse.maven:irisshaders-455508:6117625")
-    onlyMainRuntimeOnly "maven.modrinth:sodium:mc1.21.1-0.6.5-neoforge"
-
-
-    onlyMainRuntimeOnly("curse.maven:journeymap-32274:5541925")
-
-    onlyMainRuntimeOnly("curse.maven:spark-361579:5434153")
-    onlyMainRuntimeOnly("curse.maven:farmers-delight-398521:5772720")
+    implementation "maven.modrinth:sodium:mc26.1.1-0.8.9-neoforge"
+    implementation "maven.modrinth:iris:1.10.9+26.1-neoforge"
 
     println("----Scan onlyMainRuntimeOnly libs begin----")
     fileTree(dir: 'libs', include: ['*.jar']).each { File file ->
