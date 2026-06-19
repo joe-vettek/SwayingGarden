@@ -11,14 +11,12 @@ import xueluoanping.swayinggarden.client.shader.IrisHook;
 public class AllListener {
 
     @SubscribeEvent
-    public static void onTagsUpdatedEvent(TagsUpdatedEvent tagsUpdatedEvent) {
-        if (tagsUpdatedEvent.getUpdateCause() == TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED) {
-            try {
-                Class<?> ignored = Class.forName("net.irisshaders.iris.shaderpack.materialmap.WorldRenderingSettings", false, Thread.currentThread().getContextClassLoader());
-                IrisHook.reload();
-            } catch (Exception ignored) {
-                SwayingGarden.logger("Have you installed Iris?");
-            }
+    public static void onTagsUpdatedEvent(TagsUpdatedEvent.ClientPacketReceived tagsUpdatedEvent) {
+        try {
+            Class<?> ignored = Class.forName("net.irisshaders.iris.shaderpack.materialmap.WorldRenderingSettings", false, Thread.currentThread().getContextClassLoader());
+            IrisHook.reload();
+        } catch (Exception ignored) {
+            SwayingGarden.logger("Have you installed Iris?");
         }
     }
 

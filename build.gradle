@@ -1,9 +1,8 @@
 plugins {
     id 'java-library'
-    id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.1.21'
+    id 'net.neoforged.moddev' version '2.0.141'
 }
 
 
@@ -52,44 +51,54 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 //minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
 //minecraft.accessTransformers.entry public net.minecraft.client.Minecraft textureManager # textureManager
 sourceSets {
+    main {
+    }
     onlyMain {
+//        compileClasspath += sourceSets.main.output
+//        runtimeClasspath += sourceSets.main.output
+        compileClasspath += main.compileClasspath
+        compileClasspath += main.output
+        runtimeClasspath += main.runtimeClasspath
     }
 }
 // Default run configurations.
 // These can be tweaked, removed, or duplicated as needed.
-runs {
-    // applies to all the run configs below
-    configureEach {
-        // Recommended logging data for a userdev environment
-        // The markers can be added/remove as needed separated by commas.
-        // "SCAN": For mods scan.
-        // "REGISTRIES": For firing of registry events.
-        // "REGISTRYDUMP": For getting the contents of all registries.
-        systemProperty 'forge.logging.markers', 'REGISTRIES'
+neoForge {
+    // Specify the version of NeoForge to use.
+    version = project.neo_version
+    runs {
+        client {
+            client()
+            sourceSet = sourceSets.onlyMain
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
 
-        // Recommended logging level for the console
-        // You can set various levels here.
-        // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
-        systemProperty 'forge.logging.console.level', 'debug'
+            jvmArguments = ['-Dmixin.debug.export=true', "-Xmx2548M"]
+        }
 
-        modSource project.sourceSets.main
+        server {
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            gameDirectory = project.file('runs/server')
+        }
+
+        gameTestServer {
+            type = "gameTestServer"
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        // applies to all the run configs above
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
     }
 
-    client {
-        // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-        modSource project.sourceSets.onlyMain
-        jvmArguments = [
-                '-Dmixin.debug.export=true',
-                "-Xmx3048M"]
-
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
     }
-
-    server {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-//        programArgument '--nogui'
-    }
-
 }
 
 
@@ -114,8 +123,8 @@ dependencies {
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation "net.neoforged:neoforge:${neo_version}"
 
-    implementation "maven.modrinth:sodium:mc26.1.1-0.8.9-neoforge"
-    implementation "maven.modrinth:iris:1.10.9+26.1-neoforge"
+    implementation "maven.modrinth:sodium:mc26.2-0.9.0-neoforge"
+    compileOnly "maven.modrinth:iris:1.10.9+26.1-neoforge"
 
     println("----Scan onlyMainRuntimeOnly libs begin----")
     fileTree(dir: 'libs', include: ['*.jar']).each { File file ->
